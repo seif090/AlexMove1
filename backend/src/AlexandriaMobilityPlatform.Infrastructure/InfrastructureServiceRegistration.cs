@@ -39,6 +39,8 @@ public static class InfrastructureServiceRegistration
         services.AddScoped<ITrackingService, TrackingService>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+        services.AddHostedService<SeedDataHostedService>();
+
         services.AddStackExchangeRedisCache(options =>
         {
             options.Configuration = configuration.GetConnectionString("Redis");
