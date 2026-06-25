@@ -14,8 +14,8 @@ export class AuthService {
 
   currentUser = signal<UserProfile | null>(this.loadUser());
   isAuthenticated = computed(() => !!this.currentUser());
-  isDriver = computed(() => false);
-  isAdmin = computed(() => false);
+  isDriver = computed(() => this.currentUser()?.role === 'Driver');
+  isAdmin = computed(() => this.currentUser()?.role === 'SuperAdmin' || this.currentUser()?.role === 'CommunityAdmin');
 
   constructor(private http: HttpClient, private router: Router) {}
 

@@ -23,7 +23,6 @@ public static class InfrastructureServiceRegistration
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
         services.AddScoped<IDateTime, DateTimeService>();
-        services.AddSingleton<ICacheService, RedisCacheService>();
         services.AddSingleton<INotificationService, NotificationService>();
         services.AddSingleton<IEmailService, EmailService>();
 
@@ -41,11 +40,29 @@ public static class InfrastructureServiceRegistration
 
         services.AddHostedService<SeedDataHostedService>();
 
-        services.AddStackExchangeRedisCache(options =>
+        var redisConnection = configuration.GetConnectionString("Redis");
+        if (!string.IsNullOrEmpty(redisConnection))
         {
-            options.Configuration = configuration.GetConnectionString("Redis");
-            options.InstanceName = "AlexMobility_";
-        });
+            try
+            {
+                services.AddStackExchangeRedisCache(options =>
+                {
+                    options.Configuration = redisConnection;
+                    options.InstanceName = "AlexMobility_";
+                });
+                services.AddSingleton<ICacheService, RedisCacheService>();
+            }
+            catch
+            {
+                services.AddMemoryCache();
+                services.AddSingleton<ICacheService, MemoryCacheService>();
+            }
+        }
+        else
+        {
+            services.AddMemoryCache();
+            services.AddSingleton<ICacheService, MemoryCacheService>();
+        }
         return services;
     }
 }

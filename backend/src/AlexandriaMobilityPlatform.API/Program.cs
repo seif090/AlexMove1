@@ -63,7 +63,22 @@ builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddSignalR().AddStackExchangeRedis(builder.Configuration.GetConnectionString("Redis")!, options => options.Configuration.ChannelPrefix = "AlexMobility");
+var redisConnection = builder.Configuration.GetConnectionString("Redis");
+if (!string.IsNullOrEmpty(redisConnection))
+{
+    try
+    {
+        builder.Services.AddSignalR().AddStackExchangeRedis(redisConnection, options => options.Configuration.ChannelPrefix = "AlexMobility");
+    }
+    catch
+    {
+        builder.Services.AddSignalR();
+    }
+}
+else
+{
+    builder.Services.AddSignalR();
+}
 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var secretKey = jwtSettings["SecretKey"] ?? throw new InvalidOperationException("JWT SecretKey not configured");
@@ -112,19 +127,26 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddMemoryCache();
 
-builder.Services.AddHangfire(config => config
-    .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
-    .UseSimpleAssemblyNameTypeSerializer()
-    .UseRecommendedSerializerSettings()
-    .UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection"), new SqlServerStorageOptions
-    {
-        CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-        SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-        QueuePollInterval = TimeSpan.FromSeconds(15),
-        UseRecommendedIsolationLevel = true,
-        SchemaName = "Hangfire"
-    }));
-builder.Services.AddHangfireServer();
+try
+{
+    builder.Services.AddHangfire(config => config
+        .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+        .UseSimpleAssemblyNameTypeSerializer()
+        .UseRecommendedSerializerSettings()
+        .UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection"), new SqlServerStorageOptions
+        {
+            CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+            SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+            QueuePollInterval = TimeSpan.FromSeconds(15),
+            UseRecommendedIsolationLevel = true,
+            SchemaName = "Hangfire"
+        }));
+    builder.Services.AddHangfireServer();
+}
+catch
+{
+    // Hangfire not available in this environment
+}
 
 var app = builder.Build();
 
@@ -138,7 +160,6 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<RequestLoggingMiddleware>();
 app.UseMiddleware<AuditLoggingMiddleware>();
 
-app.UseHttpsRedirection();
 app.UseCors("AllowAngularApp");
 app.UseAuthentication();
 app.UseAuthorization();
@@ -153,6 +174,6 @@ using (var scope = app.Services.CreateScope())
     await db.Database.EnsureCreatedAsync();
 }
 
-app.MapHangfireDashboard("/hangfire");
+try { app.MapHangfireDashboard("/hangfire"); } catch { }
 
 app.Run();

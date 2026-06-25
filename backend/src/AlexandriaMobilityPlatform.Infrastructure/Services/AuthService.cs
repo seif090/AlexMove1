@@ -114,7 +114,7 @@ public class AuthService : IAuthService
         var response = new AuthResponseDto(
             token,
             refreshToken.Token,
-            new UserProfileDto(user.Id, user.FullName, user.Email ?? "", user.PhoneNumber ?? "", user.ProfileImageUrl, user.PreferredLanguage ?? "en"),
+            new UserProfileDto(user.Id, user.FullName, user.Email ?? "", user.PhoneNumber ?? "", user.ProfileImageUrl, user.PreferredLanguage ?? "en", roles.FirstOrDefault() ?? "Passenger"),
             DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["JwtSettings:ExpirationInMinutes"] ?? "60")));
 
         return Result<AuthResponseDto>.Success(response);

@@ -29,4 +29,5 @@ export interface UserProfile {
   phoneNumber: string;
   profileImageUrl?: string;
   preferredLanguage: string;
+  role?: string;
 }

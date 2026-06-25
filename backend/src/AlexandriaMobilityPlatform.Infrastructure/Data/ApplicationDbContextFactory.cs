@@ -8,7 +8,7 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Applicati
     public ApplicationDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-        optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AlexandriaMobility;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
+        optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=AlexandriaMobility;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
         return new ApplicationDbContext(optionsBuilder.Options);
     }
 }

@@ -12,4 +12,5 @@ public record UserProfileDto(
     string Email,
     string PhoneNumber,
     string? ProfileImageUrl,
-    string PreferredLanguage);
+    string PreferredLanguage,
+    string Role);
