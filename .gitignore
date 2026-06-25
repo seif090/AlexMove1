@@ -1,0 +1,45 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.dll
+*.exe
+*.pdb
+*.nupkg
+*.snupkg
+*.vs/
+.vs/
+*.DotSettings.user
+launchSettings.json
+
+## Node / Angular
+node_modules/
+web/node_modules/
+web/dist/
+web/.angular/
+.angular/
+.web/
+*.log
+npm-debug.log*
+
+## IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+## OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+## Environment
+*.env
+*.env.local
+.env.local
+
+## Docker
+docker-compose.override.yml
