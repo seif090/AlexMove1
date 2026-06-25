@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/AlexandriaMobilityPlatform.API/AlexandriaMobilityPlatform.API.csproj" />
+    <Project Path="src/AlexandriaMobilityPlatform.Application/AlexandriaMobilityPlatform.Application.csproj" />
+    <Project Path="src/AlexandriaMobilityPlatform.Domain/AlexandriaMobilityPlatform.Domain.csproj" />
+    <Project Path="src/AlexandriaMobilityPlatform.Infrastructure/AlexandriaMobilityPlatform.Infrastructure.csproj" />
+  </Folder>
+</Solution>
