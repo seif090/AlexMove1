@@ -102,3 +102,13 @@ export interface Vehicle {
   year: number;
   isActive: boolean;
 }
+
+export interface User {
+  id: number;
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  role: string;
+  isActive: boolean;
+  createdAt: string;
+}

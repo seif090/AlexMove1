@@ -4,27 +4,18 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ApiService } from '../../../core/services/api.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { Community, Group } from '../../../core/models/api-response.model';
+import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
+import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-community-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, NavbarComponent, TranslatePipe],
   template: `
     <div class="page-container">
-      <nav class="topbar">
-        <div class="topbar-brand">
-          <svg width="32" height="32" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="12" fill="#6366F1"/><path d="M14 34L24 14L34 34" stroke="white" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="28" r="3" fill="white"/></svg>
-          <span>AlexMobility</span>
-        </div>
-        <div class="topbar-nav">
-          <a routerLink="/communities">Communities</a>
-          <a routerLink="/groups">Groups</a>
-          <a routerLink="/bookings">My Bookings</a>
-        </div>
-        <button class="btn-logout" (click)="logout()">Logout</button>
-      </nav>
+      <app-navbar [navItems]="navItems" (logoutEvent)="logout()"></app-navbar>
       <div class="content" *ngIf="community">
-        <a routerLink="/communities" class="back-link">&larr; Back to Communities</a>
+        <a routerLink="/communities" class="back-link">&larr; {{ 'COMMON.BACK' | translate }}</a>
         <div class="detail-header">
           <div class="detail-icon">{{ community.type.charAt(0) }}</div>
           <div>
@@ -34,7 +25,7 @@ import { Community, Group } from '../../../core/models/api-response.model';
         </div>
         <div class="detail-cards">
           <div class="info-card">
-            <span class="info-label">Members</span>
+            <span class="info-label">{{ 'NAV.USERS' | translate }}</span>
             <span class="info-value">{{ community.memberCount }}</span>
           </div>
           <div class="info-card">
@@ -47,7 +38,7 @@ import { Community, Group } from '../../../core/models/api-response.model';
           </div>
         </div>
         <div class="section">
-          <h2>Available Groups</h2>
+          <h2>{{ 'GROUPS.AVAILABLE_GROUPS' | translate }}</h2>
           <div class="group-list">
             <div class="group-card" *ngFor="let group of groups" [routerLink]="['/groups', group.id]">
               <div class="group-info">
@@ -55,49 +46,48 @@ import { Community, Group } from '../../../core/models/api-response.model';
                 <p>{{ group.routeName }} &middot; {{ group.departureTime }}</p>
               </div>
               <div class="group-meta">
-                <span class="seats">{{ group.availableSeats }}/{{ group.capacity }} seats</span>
+                <span class="seats">{{ group.availableSeats }}/{{ group.capacity }} {{ 'GROUPS.SEATS' | translate }}</span>
                 <span class="price">{{ group.price | number:'1.0-0' }} EGP</span>
               </div>
             </div>
-            <p class="empty" *ngIf="groups.length === 0">No groups available in this community.</p>
+            <p class="empty" *ngIf="groups.length === 0">{{ 'GROUPS.NO_GROUPS_AVAILABLE' | translate }}</p>
           </div>
         </div>
       </div>
     </div>
   `,
   styles: [`
-    .page-container { min-height: 100vh; background: #f8fafc; }
-    .topbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    .topbar-brand { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; color: #1a1a2e; }
-    .topbar-nav { display: flex; gap: 24px; }
-    .topbar-nav a { text-decoration: none; color: #6b7280; font-weight: 500; font-size: 14px; padding: 8px 0; border-bottom: 2px solid transparent; transition: all 0.2s; }
-    .topbar-nav a:hover { color: #6366f1; border-bottom-color: #6366f1; }
-    .btn-logout { padding: 8px 16px; background: #f3f4f6; border: none; border-radius: 8px; cursor: pointer; font-weight: 500; }
+    .page-container { min-height: 100vh; background: var(--bg-secondary); }
     .content { max-width: 900px; margin: 0 auto; padding: 32px; }
-    .back-link { display: inline-block; margin-bottom: 24px; color: #6366f1; text-decoration: none; font-weight: 500; }
+    .back-link { display: inline-block; margin-bottom: 24px; color: var(--primary); text-decoration: none; font-weight: 500; }
     .detail-header { display: flex; align-items: center; gap: 20px; margin-bottom: 32px; }
-    .detail-icon { width: 64px; height: 64px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; font-weight: 700; }
-    .detail-header h1 { font-size: 28px; font-weight: 700; color: #1a1a2e; }
-    .detail-location { color: #6b7280; margin-top: 4px; }
+    .detail-icon { width: 64px; height: 64px; background: var(--primary-gradient); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; font-weight: 700; }
+    .detail-header h1 { font-size: 28px; font-weight: 700; color: var(--text-primary); }
+    .detail-location { color: var(--text-secondary); margin-top: 4px; }
     .detail-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
-    .info-card { background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-    .info-label { display: block; color: #9ca3af; font-size: 13px; margin-bottom: 4px; }
-    .info-value { font-size: 20px; font-weight: 700; color: #1a1a2e; }
-    .section h2 { font-size: 20px; font-weight: 700; color: #1a1a2e; margin-bottom: 16px; }
+    .info-card { background: var(--bg-primary); border-radius: 12px; padding: 20px; text-align: center; box-shadow: var(--shadow-sm); }
+    .info-label { display: block; color: var(--text-tertiary); font-size: 13px; margin-bottom: 4px; }
+    .info-value { font-size: 20px; font-weight: 700; color: var(--text-primary); }
+    .section h2 { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
     .group-list { display: flex; flex-direction: column; gap: 12px; }
-    .group-card { display: flex; justify-content: space-between; align-items: center; background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); cursor: pointer; transition: box-shadow 0.2s; }
-    .group-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    .group-info h3 { font-size: 16px; font-weight: 600; color: #1a1a2e; }
-    .group-info p { color: #6b7280; font-size: 14px; margin-top: 2px; }
+    .group-card { display: flex; justify-content: space-between; align-items: center; background: var(--bg-primary); border-radius: 12px; padding: 20px; box-shadow: var(--shadow-sm); cursor: pointer; transition: box-shadow 0.2s; }
+    .group-card:hover { box-shadow: var(--shadow-md); }
+    .group-info h3 { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+    .group-info p { color: var(--text-secondary); font-size: 14px; margin-top: 2px; }
     .group-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-    .seats { font-size: 13px; color: #10b981; font-weight: 500; }
-    .price { font-size: 16px; font-weight: 700; color: #6366f1; }
-    .empty { color: #9ca3af; text-align: center; padding: 40px; }
+    .seats { font-size: 13px; color: var(--success); font-weight: 500; }
+    .price { font-size: 16px; font-weight: 700; color: var(--primary); }
+    .empty { color: var(--text-tertiary); text-align: center; padding: 40px; }
   `]
 })
 export class CommunityDetailComponent implements OnInit {
   community: Community | null = null;
   groups: Group[] = [];
+  navItems = [
+    { labelKey: 'NAV.COMMUNITIES', route: '/communities' },
+    { labelKey: 'NAV.GROUPS', route: '/groups' },
+    { labelKey: 'NAV.MY_BOOKINGS', route: '/bookings' }
+  ];
 
   constructor(private route: ActivatedRoute, private api: ApiService, private authService: AuthService) {}
 

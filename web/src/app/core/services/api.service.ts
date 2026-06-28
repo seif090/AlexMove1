@@ -88,6 +88,21 @@ export class ApiService {
     return this.http.post<ApiResponse<any>>(`${this.baseUrl}/notifications/${id}/read`, {});
   }
 
+  // Admin - Users
+  getAllUsers(page = 1, size = 20, role?: string): Observable<ApiResponse<PaginatedResponse<any>>> {
+    let params = new HttpParams().set('pageNumber', page).set('pageSize', size);
+    if (role) params = params.set('role', role);
+    return this.http.get<ApiResponse<PaginatedResponse<any>>>(`${this.baseUrl}/users/all`, { params });
+  }
+
+  toggleUserStatus(userId: number): Observable<ApiResponse<any>> {
+    return this.http.post<ApiResponse<any>>(`${this.baseUrl}/users/${userId}/toggle-status`, {});
+  }
+
+  assignRole(userId: number, role: string): Observable<ApiResponse<any>> {
+    return this.http.post<ApiResponse<any>>(`${this.baseUrl}/users/${userId}/assign-role`, { role });
+  }
+
   // Dashboard
   getSuperAdminDashboard(): Observable<ApiResponse<any>> {
     return this.http.get<ApiResponse<any>>(`${this.baseUrl}/dashboard/super-admin`);

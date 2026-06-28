@@ -14,7 +14,7 @@ export const adminGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
   const user = authService.currentUser();
-  if (user && ((user as any).role === 'SuperAdmin' || (user as any).role === 'CommunityAdmin')) return true;
+  if (user && (user.role === 'SuperAdmin' || user.role === 'CommunityAdmin')) return true;
   router.navigate(['/']);
   return false;
 };
@@ -23,7 +23,7 @@ export const driverGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
   const user = authService.currentUser();
-  if (user && (user as any).role === 'Driver') return true;
+  if (user && user.role === 'Driver') return true;
   router.navigate(['/']);
   return false;
 };

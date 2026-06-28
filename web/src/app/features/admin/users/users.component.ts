@@ -1,100 +1,93 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { ApiService } from '../../../core/services/api.service';
+import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
+import { ApiService } from '../../../core/services/api.service';
+import { User } from '../../../core/models/api-response.model';
+import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
+import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
 @Component({
-  selector: 'app-users',
+  selector: 'app-admin-users',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, FormsModule, NavbarComponent, TranslatePipe],
   template: `
     <div class="page-container">
-      <nav class="topbar">
-        <div class="topbar-brand">
-          <svg width="32" height="32" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="12" fill="#6366F1"/><path d="M14 34L24 14L34 34" stroke="white" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="28" r="3" fill="white"/></svg>
-          <span>AlexMobility Admin</span>
-        </div>
-        <div class="topbar-nav">
-          <a routerLink="/admin/dashboard">Dashboard</a>
-          <a routerLink="/admin/users" class="active">Users</a>
-          <a routerLink="/admin/communities">Communities</a>
-        </div>
-        <button class="btn-logout" (click)="logout()">Logout</button>
-      </nav>
+      <app-navbar [navItems]="navItems" (logoutEvent)="logout()"></app-navbar>
       <div class="content">
-        <div class="page-header">
-          <h1>User Management</h1>
-          <p>View and manage platform users</p>
+        <h1>{{ 'ADMIN.MANAGE_USERS' | translate }}</h1>
+        <div class="filters">
+          <select [(ngModel)]="roleFilter" (change)="loadUsers()">
+            <option value="">{{ 'ADMIN.ALL_ROLES' | translate }}</option>
+            <option value="SuperAdmin">{{ 'ROLES.SUPER_ADMIN' | translate }}</option>
+            <option value="CommunityAdmin">{{ 'ROLES.COMMUNITY_ADMIN' | translate }}</option>
+            <option value="Driver">{{ 'ROLES.DRIVER' | translate }}</option>
+            <option value="Passenger">{{ 'ROLES.PASSENGER' | translate }}</option>
+          </select>
         </div>
-        <div class="table-card">
-          <table>
-            <thead>
-              <tr>
-                <th>User</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Role</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let user of users">
-                <td class="user-cell">
-                  <div class="user-avatar">{{ user.fullName?.charAt(0) || 'U' }}</div>
-                  <span>{{ user.fullName }}</span>
-                </td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.phoneNumber }}</td>
-                <td><span class="role-badge" [ngClass]="'role-' + (user.role || 'user').toLowerCase()">{{ user.role || 'User' }}</span></td>
-                <td><span class="status-dot" [class.active]="user.isActive"></span></td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="empty-table" *ngIf="users.length === 0">
-            <p>No users found.</p>
+        <div class="user-table">
+          <div class="user-row header">
+            <span>{{ 'AUTH.FULL_NAME' | translate }}</span>
+            <span>{{ 'AUTH.EMAIL' | translate }}</span>
+            <span>{{ 'AUTH.ROLE' | translate }}</span>
+            <span>{{ 'ADMIN.STATUS' | translate }}</span>
+          </div>
+          <div class="user-row" *ngFor="let user of users">
+            <span>{{ user.fullName }}</span>
+            <span>{{ user.email }}</span>
+            <span class="role-badge" [class]="'role-' + user.role.toLowerCase()">{{ user.role }}</span>
+            <span>
+              <button class="btn-toggle" (click)="toggleStatus(user.id)">
+                {{ user.isActive ? ('ADMIN.DEACTIVATE' | translate) : ('ADMIN.ACTIVATE' | translate) }}
+              </button>
+            </span>
           </div>
         </div>
       </div>
     </div>
   `,
   styles: [`
-    .page-container { min-height: 100vh; background: #f8fafc; }
-    .topbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    .topbar-brand { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; color: #1a1a2e; }
-    .topbar-nav { display: flex; gap: 24px; }
-    .topbar-nav a { text-decoration: none; color: #6b7280; font-weight: 500; font-size: 14px; padding: 8px 0; border-bottom: 2px solid transparent; }
-    .topbar-nav a:hover, .topbar-nav a.active { color: #6366f1; border-bottom-color: #6366f1; }
-    .btn-logout { padding: 8px 16px; background: #f3f4f6; border: none; border-radius: 8px; cursor: pointer; font-weight: 500; }
-    .content { max-width: 1200px; margin: 0 auto; padding: 32px; }
-    .page-header { margin-bottom: 32px; }
-    .page-header h1 { font-size: 28px; font-weight: 700; color: #1a1a2e; }
-    .page-header p { color: #6b7280; margin-top: 4px; }
-    .table-card { background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow: hidden; }
-    table { width: 100%; border-collapse: collapse; }
-    th { padding: 14px 20px; text-align: left; font-size: 12px; font-weight: 600; color: #9ca3af; text-transform: uppercase; background: #f9fafb; border-bottom: 1px solid #e5e7eb; }
-    td { padding: 14px 20px; font-size: 14px; color: #374151; border-bottom: 1px solid #f3f4f6; }
-    .user-cell { display: flex; align-items: center; gap: 12px; }
-    .user-avatar { width: 36px; height: 36px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; font-weight: 600; }
-    .role-badge { padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
-    .role-superadmin { background: #fef3c7; color: #92400e; }
-    .role-communityadmin { background: #e0e7ff; color: #3730a3; }
-    .role-driver { background: #d1fae5; color: #065f46; }
-    .role-user { background: #f3f4f6; color: #6b7280; }
-    .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; }
-    .status-dot.active { background: #10b981; }
-    .empty-table { padding: 40px; text-align: center; color: #9ca3af; }
+    .page-container { min-height: 100vh; background: var(--bg-secondary); }
+    .content { max-width: 1000px; margin: 0 auto; padding: 32px; }
+    h1 { font-size: 28px; font-weight: 700; color: var(--text-primary); margin-bottom: 24px; }
+    .filters { margin-bottom: 20px; }
+    select { padding: 10px 16px; border: 1px solid var(--border-color); border-radius: 10px; font-size: 14px; background: var(--bg-primary); color: var(--text-primary); }
+    .user-table { background: var(--bg-primary); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-sm); }
+    .user-row { display: grid; grid-template-columns: 2fr 2fr 1fr 1fr; padding: 16px 24px; border-bottom: 1px solid var(--border-color); align-items: center; font-size: 14px; color: var(--text-primary); }
+    .user-row.header { background: var(--bg-tertiary); font-weight: 600; color: var(--text-secondary); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .role-badge { padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; text-align: center; display: inline-block; }
+    .role-superadmin { background: var(--danger-light); color: var(--danger); }
+    .role-communityadmin { background: var(--warning-light); color: var(--warning); }
+    .role-driver { background: var(--info-light); color: var(--info); }
+    .role-passenger { background: var(--success-light); color: var(--success); }
+    .btn-toggle { padding: 6px 14px; border-radius: 8px; border: none; font-size: 13px; font-weight: 500; cursor: pointer; transition: background 0.2s; background: var(--bg-tertiary); color: var(--text-primary); }
+    .btn-toggle:hover { background: var(--bg-hover); }
   `]
 })
 export class UsersComponent implements OnInit {
-  users: any[] = [];
+  users: User[] = [];
+  roleFilter = '';
+  navItems = [
+    { labelKey: 'NAV.DASHBOARD', route: '/admin/dashboard' },
+    { labelKey: 'NAV.USERS', route: '/admin/users' },
+    { labelKey: 'NAV.COMMUNITIES', route: '/admin/communities' },
+    { labelKey: 'NAV.ROUTES', route: '/admin/routes' },
+    { labelKey: 'NAV.BOOKINGS', route: '/admin/bookings' }
+  ];
 
   constructor(private api: ApiService, private authService: AuthService) {}
 
-  ngOnInit() {
-    this.api.getProfile().subscribe({
-      next: (res) => { if (res.data) this.users = [res.data]; }
+  ngOnInit() { this.loadUsers(); }
+
+  loadUsers() {
+    this.api.getAllUsers(1, 100, this.roleFilter || undefined).subscribe({
+      next: (res) => { this.users = res.data?.items || []; },
+      error: () => { this.users = []; }
     });
+  }
+
+  toggleStatus(userId: number) {
+    this.api.toggleUserStatus(userId).subscribe({ next: () => this.loadUsers() });
   }
 
   logout() { this.authService.logout(); }

@@ -3,29 +3,20 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ApiService } from '../../../core/services/api.service';
 import { AuthService } from '../../../core/services/auth.service';
+import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
+import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, NavbarComponent, TranslatePipe],
   template: `
     <div class="page-container">
-      <nav class="topbar">
-        <div class="topbar-brand">
-          <svg width="32" height="32" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="12" fill="#6366F1"/><path d="M14 34L24 14L34 34" stroke="white" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="28" r="3" fill="white"/></svg>
-          <span>AlexMobility Admin</span>
-        </div>
-        <div class="topbar-nav">
-          <a routerLink="/admin/dashboard" class="active">Dashboard</a>
-          <a routerLink="/admin/users">Users</a>
-          <a routerLink="/admin/communities">Communities</a>
-        </div>
-        <button class="btn-logout" (click)="logout()">Logout</button>
-      </nav>
+      <app-navbar [navItems]="navItems" (logoutEvent)="logout()"></app-navbar>
       <div class="content">
         <div class="page-header">
-          <h1>Admin Dashboard</h1>
-          <p>System overview and analytics</p>
+          <h1>{{ 'ADMIN.PLATFORM_OVERVIEW' | translate }}</h1>
+          <p>{{ 'ADMIN.SYSTEM_OVERVIEW' | translate }}</p>
         </div>
         <div class="stats-grid">
           <div class="stat-card" *ngFor="let stat of stats">
@@ -38,7 +29,7 @@ import { AuthService } from '../../../core/services/auth.service';
         </div>
         <div class="dashboard-grid">
           <div class="dashboard-card">
-            <h3>Recent Activity</h3>
+            <h3>{{ 'ADMIN.RECENT_ACTIVITY' | translate }}</h3>
             <div class="activity-list">
               <div class="activity-item" *ngFor="let activity of recentActivity">
                 <div class="activity-dot" [style.background]="activity.color"></div>
@@ -50,10 +41,10 @@ import { AuthService } from '../../../core/services/auth.service';
             </div>
           </div>
           <div class="dashboard-card">
-            <h3>Quick Actions</h3>
+            <h3>{{ 'ADMIN.QUICK_ACTIONS' | translate }}</h3>
             <div class="action-list">
-              <a routerLink="/admin/users" class="action-btn">Manage Users</a>
-              <a routerLink="/admin/communities" class="action-btn">Manage Communities</a>
+              <a routerLink="/admin/users" class="action-btn">{{ 'ADMIN.MANAGE_USERS' | translate }}</a>
+              <a routerLink="/admin/communities" class="action-btn">{{ 'ADMIN.MANAGE_COMMUNITIES' | translate }}</a>
             </div>
           </div>
         </div>
@@ -61,33 +52,27 @@ import { AuthService } from '../../../core/services/auth.service';
     </div>
   `,
   styles: [`
-    .page-container { min-height: 100vh; background: #f8fafc; }
-    .topbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    .topbar-brand { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; color: #1a1a2e; }
-    .topbar-nav { display: flex; gap: 24px; }
-    .topbar-nav a { text-decoration: none; color: #6b7280; font-weight: 500; font-size: 14px; padding: 8px 0; border-bottom: 2px solid transparent; }
-    .topbar-nav a:hover, .topbar-nav a.active { color: #6366f1; border-bottom-color: #6366f1; }
-    .btn-logout { padding: 8px 16px; background: #f3f4f6; border: none; border-radius: 8px; cursor: pointer; font-weight: 500; }
+    .page-container { min-height: 100vh; background: var(--bg-secondary); }
     .content { max-width: 1200px; margin: 0 auto; padding: 32px; }
     .page-header { margin-bottom: 32px; }
-    .page-header h1 { font-size: 28px; font-weight: 700; color: #1a1a2e; }
-    .page-header p { color: #6b7280; margin-top: 4px; }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 32px; }
-    .stat-card { display: flex; align-items: center; gap: 16px; background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .page-header h1 { font-size: 28px; font-weight: 700; color: var(--text-primary); }
+    .page-header p { color: var(--text-secondary); margin-top: 4px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin-bottom: 32px; }
+    .stat-card { display: flex; align-items: center; gap: 16px; background: var(--bg-primary); border-radius: 12px; padding: 20px; box-shadow: var(--shadow-sm); }
     .stat-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: white; }
-    .stat-value { display: block; font-size: 24px; font-weight: 700; color: #1a1a2e; }
-    .stat-label { font-size: 13px; color: #9ca3af; }
+    .stat-value { display: block; font-size: 24px; font-weight: 700; color: var(--text-primary); }
+    .stat-label { font-size: 13px; color: var(--text-tertiary); }
     .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .dashboard-card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-    .dashboard-card h3 { font-size: 16px; font-weight: 600; color: #1a1a2e; margin-bottom: 16px; }
+    .dashboard-card { background: var(--bg-primary); border-radius: 12px; padding: 24px; box-shadow: var(--shadow-sm); }
+    .dashboard-card h3 { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 16px; }
     .activity-list { display: flex; flex-direction: column; gap: 16px; }
     .activity-item { display: flex; gap: 12px; }
     .activity-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
-    .activity-text { font-size: 14px; color: #374151; }
-    .activity-time { font-size: 12px; color: #9ca3af; }
+    .activity-text { font-size: 14px; color: var(--text-primary); }
+    .activity-time { font-size: 12px; color: var(--text-tertiary); }
     .action-list { display: flex; flex-direction: column; gap: 12px; }
-    .action-btn { display: block; padding: 12px 16px; background: #f3f4f6; border-radius: 8px; text-decoration: none; color: #374151; font-weight: 500; transition: background 0.2s; }
-    .action-btn:hover { background: #e5e7eb; }
+    .action-btn { display: block; padding: 12px 16px; background: var(--bg-tertiary); border-radius: 8px; text-decoration: none; color: var(--text-primary); font-weight: 500; transition: background 0.2s; }
+    .action-btn:hover { background: var(--bg-hover); }
   `]
 })
 export class AdminDashboardComponent implements OnInit {
@@ -101,6 +86,11 @@ export class AdminDashboardComponent implements OnInit {
     { text: 'New user registered', time: '2 min ago', color: '#10b981' },
     { text: 'Community created', time: '1 hour ago', color: '#6366f1' },
     { text: 'Booking cancelled', time: '3 hours ago', color: '#ef4444' }
+  ];
+  navItems = [
+    { labelKey: 'NAV.DASHBOARD', route: '/admin/dashboard' },
+    { labelKey: 'NAV.USERS', route: '/admin/users' },
+    { labelKey: 'NAV.COMMUNITIES', route: '/admin/communities' }
   ];
 
   constructor(private api: ApiService, private authService: AuthService) {}
