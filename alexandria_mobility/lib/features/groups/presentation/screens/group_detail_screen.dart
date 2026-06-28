@@ -377,7 +377,7 @@ class GroupDetailScreen extends ConsumerWidget {
                 vertical: 6,
               ),
               decoration: BoxDecoration(
-                color: AppColors.lightSurfaceVariant,
+                color: AppColors.surfaceContainerLow,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
@@ -810,7 +810,7 @@ class _BookingBottomSheetState extends ConsumerState<_BookingBottomSheet> {
       width: 44,
       height: 44,
       decoration: BoxDecoration(
-        color: onPressed != null ? AppColors.primary : AppColors.lightSurfaceVariant,
+        color: onPressed != null ? AppColors.primary : AppColors.surfaceContainerLow,
         borderRadius: BorderRadius.circular(12),
       ),
       child: IconButton(

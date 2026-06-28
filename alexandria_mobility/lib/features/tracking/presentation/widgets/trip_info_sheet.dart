@@ -80,7 +80,7 @@ class TripInfoSheet extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: AppColors.lightSurfaceVariant,
+              color: AppColors.surfaceContainerLow,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
@@ -159,12 +159,12 @@ class TripInfoSheet extends StatelessWidget {
     switch (status) {
       case TripStatus.scheduled:
         bgColor = AppColors.warningLight;
-        textColor = AppColors.warningDark;
+        textColor = AppColors.warning;
         text = 'Scheduled';
         break;
       case TripStatus.inProgress:
         bgColor = AppColors.successLight;
-        textColor = AppColors.successDark;
+        textColor = AppColors.success;
         text = 'In Progress';
         break;
       case TripStatus.completed:

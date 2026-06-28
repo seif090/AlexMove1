@@ -220,7 +220,7 @@ class NotificationScreen extends ConsumerWidget {
         break;
       case NotificationType.system:
         icon = Icons.info_outline;
-        bgColor = AppColors.lightSurfaceVariant;
+        bgColor = AppColors.surfaceContainerLow;
         iconColor = AppColors.lightOnSurfaceVariant;
         break;
     }

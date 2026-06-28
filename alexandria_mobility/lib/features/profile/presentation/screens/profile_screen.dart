@@ -42,7 +42,7 @@ class ProfileScreen extends ConsumerWidget {
       ),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [AppColors.primaryGradientStart, AppColors.primaryGradientEnd],
+          colors: [AppColors.primary, AppColors.primaryContainer],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),

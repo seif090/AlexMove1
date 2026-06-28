@@ -26,7 +26,7 @@ class PassengerListTile extends ConsumerWidget {
         decoration: BoxDecoration(
           color: isPickedUp
               ? AppColors.successLight
-              : AppColors.lightSurfaceVariant,
+              : AppColors.surfaceContainerLow,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Center(
@@ -81,7 +81,7 @@ class PassengerListTile extends ConsumerWidget {
           onChanged: onChanged,
           activeThumbColor: AppColors.success,
           activeTrackColor: AppColors.successLight,
-          inactiveTrackColor: AppColors.lightSurfaceVariant,
+          inactiveTrackColor: AppColors.surfaceContainerLow,
         ),
       ),
     );

@@ -58,22 +58,22 @@ class StatusBadge extends StatelessWidget {
       case BadgeVariant.primary:
         return AppColors.primaryLight;
       case BadgeVariant.neutral:
-        return AppColors.lightSurfaceVariant;
+        return AppColors.surfaceContainerLow;
     }
   }
 
   Color get _textColor {
     switch (variant) {
       case BadgeVariant.success:
-        return AppColors.successDark;
+        return AppColors.success;
       case BadgeVariant.warning:
-        return AppColors.warningDark;
+        return AppColors.warning;
       case BadgeVariant.danger:
-        return AppColors.dangerDark;
+        return AppColors.danger;
       case BadgeVariant.info:
         return AppColors.info;
       case BadgeVariant.primary:
-        return AppColors.primaryDark;
+        return AppColors.primary;
       case BadgeVariant.neutral:
         return AppColors.lightOnSurfaceVariant;
     }

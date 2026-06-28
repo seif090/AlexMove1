@@ -98,7 +98,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
         height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [AppColors.primary, AppColors.primaryDark],
+            colors: [AppColors.primary, AppColors.primaryHover],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),

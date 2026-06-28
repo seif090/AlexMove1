@@ -280,7 +280,7 @@ class _SkeletonCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.lightSurfaceVariant,
+        color: AppColors.surfaceContainerLow,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(

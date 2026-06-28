@@ -52,7 +52,7 @@ class SkeletonLoader extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: AppColors.lightSurfaceVariant,
+        color: AppColors.surfaceContainerLow,
         borderRadius: BorderRadius.circular(isCircular ? 999 : borderRadius),
       ),
     );

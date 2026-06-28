@@ -13,13 +13,13 @@ class CommunityDetailScreen extends ConsumerWidget {
   List<Color> _getGradientColors(String type) {
     switch (type.toLowerCase()) {
       case 'neighborhood':
-        return [AppColors.primary, AppColors.primaryDark];
+        return [AppColors.primary, AppColors.primaryHover];
       case 'workplace':
-        return [AppColors.secondary, AppColors.secondaryDark];
+        return [AppColors.secondary, AppColors.secondaryHover];
       case 'university':
         return [AppColors.info, AppColors.primary];
       default:
-        return [AppColors.primaryGradientStart, AppColors.primaryGradientEnd];
+        return [AppColors.primary, AppColors.primaryContainer];
     }
   }
 
@@ -359,7 +359,7 @@ class CommunityDetailScreen extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: AppColors.lightSurfaceVariant,
+        color: AppColors.surfaceContainerLow,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(

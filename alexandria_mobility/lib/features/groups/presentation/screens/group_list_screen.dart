@@ -346,7 +346,7 @@ class _SkeletonCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.lightSurfaceVariant,
+        color: AppColors.surfaceContainerLow,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(

@@ -149,7 +149,7 @@ class _TrackingMapScreenState extends ConsumerState<TrackingMapScreen> {
               width: 36,
               height: 36,
               decoration: BoxDecoration(
-                color: AppColors.lightSurfaceVariant,
+                color: AppColors.surfaceContainerLow,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: const Icon(
@@ -205,10 +205,10 @@ class _TrackingMapScreenState extends ConsumerState<TrackingMapScreen> {
                 fontWeight: FontWeight.w600,
                 fontFamily: 'Cairo',
                 color: trip.status == TripStatus.inProgress
-                    ? AppColors.successDark
+                    ? AppColors.success
                     : trip.status == TripStatus.completed
                         ? AppColors.info
-                        : AppColors.warningDark,
+                        : AppColors.warning,
               ),
             ),
           ),
@@ -289,7 +289,7 @@ class _TrackingMapScreenState extends ConsumerState<TrackingMapScreen> {
                 decoration: BoxDecoration(
                   color: passenger.isPickedUp
                       ? AppColors.successLight
-                      : AppColors.lightSurfaceVariant,
+                      : AppColors.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
@@ -315,7 +315,7 @@ class _TrackingMapScreenState extends ConsumerState<TrackingMapScreen> {
                               fontWeight: FontWeight.w600,
                               fontFamily: 'Cairo',
                               color: passenger.isPickedUp
-                                  ? AppColors.successDark
+                                  ? AppColors.success
                                   : AppColors.lightOnSurface,
                             ),
                           ),

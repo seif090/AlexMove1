@@ -241,7 +241,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                         filled: true,
                         fillColor: _controllers[index].text.isNotEmpty
                             ? AppColors.primaryLight
-                            : AppColors.lightSurfaceVariant,
+                            : AppColors.surfaceContainerLow,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(

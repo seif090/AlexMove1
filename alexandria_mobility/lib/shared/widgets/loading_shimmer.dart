@@ -35,14 +35,14 @@ class LoadingShimmer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Shimmer.fromColors(
-      baseColor: AppColors.lightSurfaceVariant,
+      baseColor: AppColors.surfaceContainerLow,
       highlightColor: AppColors.lightSurface,
       child: isCircular
           ? Container(
               width: width,
               height: height,
               decoration: const BoxDecoration(
-                color: AppColors.lightSurfaceVariant,
+                color: AppColors.surfaceContainerLow,
                 shape: BoxShape.circle,
               ),
             )
@@ -50,7 +50,7 @@ class LoadingShimmer extends ConsumerWidget {
               width: width,
               height: height,
               decoration: BoxDecoration(
-                color: AppColors.lightSurfaceVariant,
+                color: AppColors.surfaceContainerLow,
                 borderRadius: BorderRadius.circular(borderRadius),
               ),
             ),
@@ -71,7 +71,7 @@ class ShimmerList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Shimmer.fromColors(
-      baseColor: AppColors.lightSurfaceVariant,
+      baseColor: AppColors.surfaceContainerLow,
       highlightColor: AppColors.lightSurface,
       child: ListView.builder(
         itemCount: itemCount,
@@ -93,7 +93,7 @@ class ShimmerBookingCard extends StatelessWidget {
       child: Container(
         height: 140,
         decoration: BoxDecoration(
-          color: AppColors.lightSurfaceVariant,
+          color: AppColors.surfaceContainerLow,
           borderRadius: BorderRadius.circular(16),
         ),
       ),
@@ -111,7 +111,7 @@ class ShimmerCommunityCard extends StatelessWidget {
       child: Container(
         height: 160,
         decoration: BoxDecoration(
-          color: AppColors.lightSurfaceVariant,
+          color: AppColors.surfaceContainerLow,
           borderRadius: BorderRadius.circular(16),
         ),
       ),
@@ -129,7 +129,7 @@ class ShimmerGroupCard extends StatelessWidget {
       child: Container(
         height: 180,
         decoration: BoxDecoration(
-          color: AppColors.lightSurfaceVariant,
+          color: AppColors.surfaceContainerLow,
           borderRadius: BorderRadius.circular(16),
         ),
       ),
