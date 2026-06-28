@@ -1,0 +1,153 @@
+{
+  "APP": {
+    "NAME": "Alexandria Mobility",
+    "TAGLINE": "Community-based transportation"
+  },
+  "AUTH": {
+    "LOGIN": "Sign In",
+    "REGISTER": "Sign Up",
+    "LOGOUT": "Logout",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "FULL_NAME": "Full Name",
+    "PHONE": "Phone Number",
+    "FORGOT_PASSWORD": "Forgot password?",
+    "NO_ACCOUNT": "Don't have an account?",
+    "HAS_ACCOUNT": "Already have an account?",
+    "SIGNING_IN": "Signing in...",
+    "CREATING_ACCOUNT": "Creating account...",
+    "INVALID_CREDENTIALS": "Invalid email or password",
+    "REGISTRATION_FAILED": "Registration failed",
+    "ACCOUNT_CREATED": "Account created successfully!"
+  },
+  "NAV": {
+    "COMMUNITIES": "Communities",
+    "GROUPS": "Groups",
+    "MY_BOOKINGS": "My Bookings",
+    "PROFILE": "Profile",
+    "DASHBOARD": "Dashboard",
+    "USERS": "Users",
+    "MY_TRIPS": "My Trips",
+    "TRACK": "Track"
+  },
+  "COMMUNITIES": {
+    "TITLE": "Communities",
+    "SUBTITLE": "Join a community to access shared transportation",
+    "NO_COMMUNITIES": "No communities available yet.",
+    "VIEW_DETAILS": "View Details",
+    "JOIN": "Join",
+    "MEMBERS": "members",
+    "JOIN_REQUEST_SENT": "Join request sent!",
+    "JOIN_FAILED": "Failed to join community"
+  },
+  "GROUPS": {
+    "TITLE": "My Groups",
+    "SUBTITLE": "Transportation groups you've joined",
+    "NO_GROUPS": "You haven't joined any groups yet.",
+    "BROWSE_COMMUNITIES": "Browse Communities",
+    "DEPARTURE": "Departure",
+    "SEATS": "Seats",
+    "PRICE": "Price",
+    "AVAILABLE_GROUPS": "Available Groups",
+    "NO_GROUPS_AVAILABLE": "No groups available in this community.",
+    "BOOK_NOW": "Book Now",
+    "BOOKING": "Booking...",
+    "BOOKING_SUCCESS": "Booking created successfully!",
+    "BOOKING_FAILED": "Booking failed",
+    "SELECT_DATE": "Select Date",
+    "SUBSCRIBED": "You are subscribed to this group"
+  },
+  "BOOKINGS": {
+    "TITLE": "My Bookings",
+    "SUBTITLE": "Manage your transportation bookings",
+    "NO_BOOKINGS": "No bookings yet. Browse communities and groups to make your first booking.",
+    "CANCEL": "Cancel",
+    "CONFIRM_CANCEL": "Are you sure you want to cancel this booking?",
+    "CANCEL_SUCCESS": "Booking cancelled",
+    "CANCEL_FAILED": "Failed to cancel booking"
+  },
+  "TRACKING": {
+    "TITLE": "Live Tracking",
+    "WAITING_DRIVER": "Waiting for driver location...",
+    "TRIP_STATUS": "Trip Status",
+    "NOT_STARTED": "Not started",
+    "DRIVER_LOCATION": "Driver Location",
+    "LATITUDE": "Latitude",
+    "LONGITUDE": "Longitude"
+  },
+  "PROFILE": {
+    "TITLE": "Profile",
+    "SAVE_CHANGES": "Save Changes",
+    "SAVING": "Saving...",
+    "SAVE_SUCCESS": "Profile updated successfully!",
+    "PREFERRED_LANGUAGE": "Preferred Language",
+    "ENGLISH": "English",
+    "ARABIC": "Arabic"
+  },
+  "ADMIN": {
+    "DASHBOARD": {
+      "TITLE": "Admin Dashboard",
+      "SUBTITLE": "System overview and analytics",
+      "TOTAL_USERS": "Total Users",
+      "COMMUNITIES": "Communities",
+      "ACTIVE_GROUPS": "Active Groups",
+      "BOOKINGS_TODAY": "Bookings Today",
+      "RECENT_ACTIVITY": "Recent Activity",
+      "QUICK_ACTIONS": "Quick Actions",
+      "MANAGE_USERS": "Manage Users",
+      "MANAGE_COMMUNITIES": "Manage Communities"
+    },
+    "USERS": {
+      "TITLE": "User Management",
+      "SUBTITLE": "View and manage platform users",
+      "ALL_ROLES": "All Roles",
+      "PASSENGERS": "Passengers",
+      "DRIVERS": "Drivers",
+      "ACTIONS": "Actions",
+      "ACTIVATE": "Activate",
+      "DEACTIVATE": "Deactivate",
+      "NO_USERS": "No users found.",
+      "LOADING": "Loading users..."
+    },
+    "COMMUNITIES": {
+      "TITLE": "Community Management",
+      "SUBTITLE": "Manage communities and their settings",
+      "NO_COMMUNITIES": "No communities found."
+    }
+  },
+  "DRIVER": {
+    "DASHBOARD": {
+      "TITLE": "Driver Dashboard",
+      "SUBTITLE": "Your driving overview and schedule",
+      "ACTIVE_TRIPS": "Active Trips",
+      "TOTAL_PASSENGERS": "Total Passengers",
+      "TODAY_SCHEDULE": "Today's Schedule",
+      "NO_TRIPS": "No trips scheduled for today."
+    },
+    "TRIPS": {
+      "TITLE": "My Trips",
+      "SUBTITLE": "Manage your scheduled trips",
+      "NO_TRIPS": "No trips scheduled yet.",
+      "START_TRIP": "Start Trip",
+      "COMPLETE": "Complete"
+    }
+  },
+  "COMMON": {
+    "LOADING": "Loading...",
+    "ERROR": "An error occurred",
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "DELETE": "Delete",
+    "EDIT": "Edit",
+    "BACK": "Back",
+    "NEXT": "Next",
+    "PREVIOUS": "Previous",
+    "SEARCH": "Search",
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive",
+    "CONFIRMED": "Confirmed",
+    "PENDING": "Pending",
+    "CANCELLED": "Cancelled",
+    "COMPLETED": "Completed"
+  }
+}

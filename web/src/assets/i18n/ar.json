@@ -1,0 +1,153 @@
+{
+  "APP": {
+    "NAME": "موبايلية الإسكندرية",
+    "TAGLINE": "نقل مجتمعي"
+  },
+  "AUTH": {
+    "LOGIN": "تسجيل الدخول",
+    "REGISTER": "إنشاء حساب",
+    "LOGOUT": "تسجيل الخروج",
+    "EMAIL": "البريد الإلكتروني",
+    "PASSWORD": "كلمة المرور",
+    "FULL_NAME": "الاسم الكامل",
+    "PHONE": "رقم الهاتف",
+    "FORGOT_PASSWORD": "نسيت كلمة المرور؟",
+    "NO_ACCOUNT": "ليس لديك حساب؟",
+    "HAS_ACCOUNT": "لديك حساب بالفعل؟",
+    "SIGNING_IN": "جاري تسجيل الدخول...",
+    "CREATING_ACCOUNT": "جاري إنشاء الحساب...",
+    "INVALID_CREDENTIALS": "بريد إلكتروني أو كلمة مرور غير صحيحة",
+    "REGISTRATION_FAILED": "فشل التسجيل",
+    "ACCOUNT_CREATED": "تم إنشاء الحساب بنجاح!"
+  },
+  "NAV": {
+    "COMMUNITIES": "المجتمعات",
+    "GROUPS": "المجموعات",
+    "MY_BOOKINGS": "حجوزاتي",
+    "PROFILE": "الملف الشخصي",
+    "DASHBOARD": "لوحة التحكم",
+    "USERS": "المستخدمون",
+    "MY_TRIPS": "رحلاتي",
+    "TRACK": "تتبع"
+  },
+  "COMMUNITIES": {
+    "TITLE": "المجتمعات",
+    "SUBTITLE": "انضم إلى مجتمع للوصول إلى النقل المشترك",
+    "NO_COMMUNITIES": "لا توجد مجتمعات متاحة بعد.",
+    "VIEW_DETAILS": "عرض التفاصيل",
+    "JOIN": "انضم",
+    "MEMBERS": "أعضاء",
+    "JOIN_REQUEST_SENT": "تم إرسال طلب الانضمام!",
+    "JOIN_FAILED": "فشل الانضمام للمجتمع"
+  },
+  "GROUPS": {
+    "TITLE": "مجموعاتي",
+    "SUBTITLE": "مجموعات النقل التي انضممت إليها",
+    "NO_GROUPS": "لم تنضم إلى أي مجموعات بعد.",
+    "BROWSE_COMMUNITIES": "تصفح المجتمعات",
+    "DEPARTURE": "المغادرة",
+    "SEATS": "المقاعد",
+    "PRICE": "السعر",
+    "AVAILABLE_GROUPS": "المجموعات المتاحة",
+    "NO_GROUPS_AVAILABLE": "لا توجد مجموعات متاحة في هذا المجتمع.",
+    "BOOK_NOW": "احجز الآن",
+    "BOOKING": "جاري الحجز...",
+    "BOOKING_SUCCESS": "تم إنشاء الحجز بنجاح!",
+    "BOOKING_FAILED": "فشل الحجز",
+    "SELECT_DATE": "اختر التاريخ",
+    "SUBSCRIBED": "أنت مشترك في هذه المجموعة"
+  },
+  "BOOKINGS": {
+    "TITLE": "حجوزاتي",
+    "SUBTITLE": "إدارة حجوزات النقل الخاصة بك",
+    "NO_BOOKINGS": "لا توجد حجوزات بعد. تصفح المجتمعات والمجموعات لإنشاء أول حجز.",
+    "CANCEL": "إلغاء",
+    "CONFIRM_CANCEL": "هل أنت متأكد من إلغاء هذا الحجز؟",
+    "CANCEL_SUCCESS": "تم إلغاء الحجز",
+    "CANCEL_FAILED": "فشل إلغاء الحجز"
+  },
+  "TRACKING": {
+    "TITLE": "تتبع مباشر",
+    "WAITING_DRIVER": "في انتظار موقع السائق...",
+    "TRIP_STATUS": "حالة الرحلة",
+    "NOT_STARTED": "لم تبدأ",
+    "DRIVER_LOCATION": "موقع السائق",
+    "LATITUDE": "خط العرض",
+    "LONGITUDE": "خط الطول"
+  },
+  "PROFILE": {
+    "TITLE": "الملف الشخصي",
+    "SAVE_CHANGES": "حفظ التغييرات",
+    "SAVING": "جاري الحفظ...",
+    "SAVE_SUCCESS": "تم تحديث الملف الشخصي بنجاح!",
+    "PREFERRED_LANGUAGE": "اللغة المفضلة",
+    "ENGLISH": "الإنجليزية",
+    "ARABIC": "العربية"
+  },
+  "ADMIN": {
+    "DASHBOARD": {
+      "TITLE": "لوحة تحكم المدير",
+      "SUBTITLE": "نظرة عامة على النظام والتحليلات",
+      "TOTAL_USERS": "إجمالي المستخدمين",
+      "COMMUNITIES": "المجتمعات",
+      "ACTIVE_GROUPS": "المجموعات النشطة",
+      "BOOKINGS_TODAY": "حجوزات اليوم",
+      "RECENT_ACTIVITY": "النشاط الأخير",
+      "QUICK_ACTIONS": "إجراءات سريعة",
+      "MANAGE_USERS": "إدارة المستخدمين",
+      "MANAGE_COMMUNITIES": "إدارة المجتمعات"
+    },
+    "USERS": {
+      "TITLE": "إدارة المستخدمين",
+      "SUBTITLE": "عرض وإدارة مستخدمي المنصة",
+      "ALL_ROLES": "جميع الأدوار",
+      "PASSENGERS": "المسافرون",
+      "DRIVERS": "السائقون",
+      "ACTIONS": "الإجراءات",
+      "ACTIVATE": "تفعيل",
+      "DEACTIVATE": "تعطيل",
+      "NO_USERS": "لم يتم العثور على مستخدمين.",
+      "LOADING": "جاري تحميل المستخدمين..."
+    },
+    "COMMUNITIES": {
+      "TITLE": "إدارة المجتمعات",
+      "SUBTITLE": "إدارة المجتمعات وإعداداتها",
+      "NO_COMMUNITIES": "لم يتم العثور على مجتمعات."
+    }
+  },
+  "DRIVER": {
+    "DASHBOARD": {
+      "TITLE": "لوحة تحكم السائق",
+      "SUBTITLE": "نظرة عامة على القيادة والجدول",
+      "ACTIVE_TRIPS": "الرحلات النشطة",
+      "TOTAL_PASSENGERS": "إجمالي المسافرين",
+      "TODAY_SCHEDULE": "جدول اليوم",
+      "NO_TRIPS": "لا توجد رحلات مجدولة لليوم."
+    },
+    "TRIPS": {
+      "TITLE": "رحلاتي",
+      "SUBTITLE": "إدارة رحلاتك المجدولة",
+      "NO_TRIPS": "لا توجد رحلات مجدولة بعد.",
+      "START_TRIP": "بدء الرحلة",
+      "COMPLETE": "إتمام"
+    }
+  },
+  "COMMON": {
+    "LOADING": "جاري التحميل...",
+    "ERROR": "حدث خطأ",
+    "SAVE": "حفظ",
+    "CANCEL": "إلغاء",
+    "DELETE": "حذف",
+    "EDIT": "تعديل",
+    "BACK": "رجوع",
+    "NEXT": "التالي",
+    "PREVIOUS": "السابق",
+    "SEARCH": "بحث",
+    "ACTIVE": "نشط",
+    "INACTIVE": "غير نشط",
+    "CONFIRMED": "مؤكد",
+    "PENDING": "قيد الانتظار",
+    "CANCELLED": "ملغى",
+    "COMPLETED": "مكتمل"
+  }
+}
