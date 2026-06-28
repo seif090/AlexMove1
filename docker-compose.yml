@@ -15,6 +15,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - alexnetwork
 
   redis:
     image: redis:7-alpine
@@ -25,6 +27,10 @@ services:
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - alexnetwork
 
   backend:
     build:
@@ -44,7 +50,16 @@ services:
       - JwtSettings__SecretKey=YourSuperSecretKeyThatIsAtLeast32CharactersLong!
       - JwtSettings__Issuer=AlexandriaMobilityPlatform
       - JwtSettings__Audience=AlexandriaMobilityClient
+      - JwtSettings__ExpirationInMinutes=60
+      - JwtSettings__RefreshExpirationInDays=7
+      - EmailSettings__SmtpServer=${SMTP_SERVER:-}
+      - EmailSettings__Port=${SMTP_PORT:-587}
+      - EmailSettings__Username=${SMTP_USERNAME:-}
+      - EmailSettings__Password=${SMTP_PASSWORD:-}
+      - EmailSettings__From=${EMAIL_FROM:-noreply@alexmobility.com}
     restart: unless-stopped
+    networks:
+      - alexnetwork
 
   web:
     build:
@@ -55,6 +70,26 @@ services:
     depends_on:
       - backend
     restart: unless-stopped
+    networks:
+      - alexnetwork
+
+  hangfire:
+    image: hangfire/dashboard:latest
+    ports:
+      - "5001:80"
+    depends_on:
+      - backend
+    environment:
+      - ConnectionString=Server=sqlserver;Database=AlexandriaMobility;User=sa;Password=YourStrong@Password123;TrustServerCertificate=True
+    restart: unless-stopped
+    networks:
+      - alexnetwork
+    profiles:
+      - monitoring
+
+networks:
+  alexnetwork:
+    driver: bridge
 
 volumes:
   sqlserver_data:
