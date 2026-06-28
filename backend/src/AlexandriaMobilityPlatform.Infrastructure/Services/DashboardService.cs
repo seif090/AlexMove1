@@ -11,24 +11,59 @@ public class DashboardService : IDashboardService
 {
     private readonly IApplicationDbContext _context;
     private readonly ICurrentUserService _currentUser;
-    public DashboardService(IApplicationDbContext context, ICurrentUserService currentUser) { _context = context; _currentUser = currentUser; }
+
+    public DashboardService(IApplicationDbContext context, ICurrentUserService currentUser)
+    {
+        _context = context;
+        _currentUser = currentUser;
+    }
 
     public async Task<Result<SuperAdminDashboardDto>> GetSuperAdminDashboardAsync(CancellationToken cancellationToken = default)
     {
         var today = DateTime.Today;
-        var totalRevenue = await _context.Payments.Where(p => p.Status == PaymentStatusEnum.Success).SumAsync(p => p.Amount, cancellationToken);
-        var dailyStats = Enumerable.Range(-6, 7).Select(offset => today.AddDays(offset)).Select(date => new DailyStatDto(date, _context.Bookings.Count(b => b.BookingDate == date), _context.Payments.Where(p => p.PaidAt.HasValue && p.PaidAt.Value.Date == date && p.Status == PaymentStatusEnum.Success).Sum(p => p.Amount))).ToList();
+        var totalRevenue = await _context.Payments
+            .Where(p => p.Status == PaymentStatusEnum.Success)
+            .SumAsync(p => p.Amount, cancellationToken);
 
-        var popularRoutes = await _context.Bookings.Include(b => b.Group).ThenInclude(g => g!.Route).GroupBy(b => b.Group!.Route!.Name).Select(g => new PopularRouteDto(g.Key, g.Count())).OrderByDescending(r => r.BookingCount).Take(5).ToListAsync(cancellationToken);
+        var dailyStats = Enumerable.Range(-6, 7)
+            .Select(offset => today.AddDays(offset))
+            .Select(date => new DailyStatDto(
+                date,
+                _context.Bookings.Count(b => b.BookingDate == date),
+                _context.Payments.Where(p => p.PaidAt.HasValue && p.PaidAt.Value.Date == date && p.Status == PaymentStatusEnum.Success).Sum(p => p.Amount)))
+            .ToList();
+
+        var popularRoutes = await _context.Bookings
+            .Include(b => b.Group)
+            .ThenInclude(g => g!.Route)
+            .GroupBy(b => b.Group!.Route!.Name)
+            .Select(g => new PopularRouteDto(g.Key, g.Count()))
+            .OrderByDescending(r => r.BookingCount)
+            .Take(5)
+            .ToListAsync(cancellationToken);
+
+        var recentActivities = await _context.AuditLogs
+            .OrderByDescending(a => a.OccurredAt)
+            .Take(10)
+            .Select(a => new RecentActivityDto(
+                a.Action,
+                $"{a.Action} on {a.EntityType}",
+                a.OccurredAt.DateTime))
+            .ToListAsync(cancellationToken);
+
+        var driverCount = await _context.Users.CountAsync(u => u.NormalizedUserName == "DRIVER", cancellationToken);
 
         var dto = new SuperAdminDashboardDto(
             await _context.Users.CountAsync(cancellationToken),
-            await _context.Users.CountAsync(u => u.NormalizedUserName == "DRIVER", cancellationToken),
+            driverCount,
             await _context.Communities.CountAsync(c => !c.IsDeleted, cancellationToken),
             await _context.Groups.CountAsync(g => !g.IsDeleted, cancellationToken),
             await _context.Bookings.CountAsync(cancellationToken),
             await _context.Bookings.CountAsync(b => b.Status == BookingStatusEnum.Confirmed && b.BookingDate == today, cancellationToken),
-            totalRevenue, new List<RecentActivityDto>(), popularRoutes, dailyStats);
+            totalRevenue,
+            recentActivities,
+            popularRoutes,
+            dailyStats);
 
         return Result<SuperAdminDashboardDto>.Success(dto);
     }
@@ -38,14 +73,25 @@ public class DashboardService : IDashboardService
         var community = await _context.Communities.FindAsync(new object[] { communityId }, cancellationToken);
         var today = DateTime.Today;
 
+        var routeStats = await _context.Groups
+            .Include(g => g.Route)
+            .Where(g => g.CommunityId == communityId && !g.IsDeleted)
+            .GroupBy(g => g.Route!.Name)
+            .Select(g => new RouteStatDto(
+                g.Key,
+                g.Count(),
+                g.Sum(x => x.Capacity - x.AvailableSeats)))
+            .ToListAsync(cancellationToken);
+
         var dto = new CommunityAdminDashboardDto(
-            communityId, community?.Name ?? "",
+            communityId,
+            community?.Name ?? "",
             await _context.CommunityMembers.CountAsync(cm => cm.CommunityId == communityId && cm.Status == MemberStatusEnum.Approved, cancellationToken),
             await _context.Routes.CountAsync(r => r.CommunityId == communityId && !r.IsDeleted, cancellationToken),
             await _context.Groups.CountAsync(g => g.CommunityId == communityId && !g.IsDeleted, cancellationToken),
             await _context.Groups.CountAsync(g => g.CommunityId == communityId && g.Status == GroupStatusEnum.Active, cancellationToken),
             await _context.Bookings.Include(b => b.Group).CountAsync(b => b.Group!.CommunityId == communityId && b.BookingDate == today, cancellationToken),
-            new List<RouteStatDto>());
+            routeStats);
 
         return Result<CommunityAdminDashboardDto>.Success(dto);
     }
@@ -55,12 +101,27 @@ public class DashboardService : IDashboardService
         var userId = _currentUser.UserId!.Value;
         var today = DateTime.Today;
 
+        var upcomingTrips = await _context.Trips
+            .Include(t => t.Group)
+            .ThenInclude(g => g!.Route)
+            .Where(t => t.Group!.DriverId == userId && t.TripDate >= today && t.Status != TripStatusEnum.Completed)
+            .OrderBy(t => t.TripDate)
+            .Take(5)
+            .Select(t => new UpcomingTripDto(
+                t.Id,
+                t.Group!.Name,
+                t.Group.Route!.Name,
+                t.TripDate,
+                t.Group.DepartureTime,
+                _context.Bookings.Count(b => b.GroupId == t.GroupId && b.BookingDate == t.TripDate && b.Status == BookingStatusEnum.Confirmed)))
+            .ToListAsync(cancellationToken);
+
         var dto = new DriverDashboardDto(
             await _context.Trips.CountAsync(t => t.Group!.DriverId == userId, cancellationToken),
             await _context.Trips.CountAsync(t => t.Group!.DriverId == userId && t.TripDate == today, cancellationToken),
             await _context.Trips.CountAsync(t => t.Group!.DriverId == userId && t.Status == TripStatusEnum.Completed, cancellationToken),
             await _context.Bookings.CountAsync(b => b.Group!.DriverId == userId && b.Status == BookingStatusEnum.Confirmed, cancellationToken),
-            new List<UpcomingTripDto>());
+            upcomingTrips);
 
         return Result<DriverDashboardDto>.Success(dto);
     }

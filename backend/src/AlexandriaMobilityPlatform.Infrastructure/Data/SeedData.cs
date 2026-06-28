@@ -42,6 +42,8 @@ public static class SeedData
         var existing = await userManager.FindByEmailAsync("admin@alexmobility.com");
         if (existing != null) return existing;
 
+        var password = Environment.GetEnvironmentVariable("SEED_ADMIN_PASSWORD") ?? "Admin@123456";
+
         var user = new ApplicationUser
         {
             UserName = "admin@alexmobility.com",
@@ -55,7 +57,7 @@ public static class SeedData
             CreatedAt = DateTimeOffset.UtcNow
         };
 
-        await userManager.CreateAsync(user, "Admin@123456");
+        await userManager.CreateAsync(user, password);
         await userManager.AddToRoleAsync(user, "SuperAdmin");
         return user;
     }
@@ -64,6 +66,8 @@ public static class SeedData
     {
         var existing = await userManager.FindByEmailAsync("driver@alexmobility.com");
         if (existing != null) return existing;
+
+        var password = Environment.GetEnvironmentVariable("SEED_DRIVER_PASSWORD") ?? "Driver@123456";
 
         var user = new ApplicationUser
         {
@@ -78,7 +82,7 @@ public static class SeedData
             CreatedAt = DateTimeOffset.UtcNow
         };
 
-        await userManager.CreateAsync(user, "Driver@123456");
+        await userManager.CreateAsync(user, password);
         await userManager.AddToRoleAsync(user, "Driver");
         return user;
     }
@@ -204,7 +208,7 @@ public static class SeedData
                 AvailableSeats = 8,
                 DepartureTime = new TimeSpan(7, 30, 0),
                 ReturnTime = new TimeSpan(17, 0, 0),
-                WorkingDays = 62, // Sun-Thu = 2+4+8+16+32 = 62
+                WorkingDays = 62,
                 Status = GroupStatusEnum.Active,
                 Price = 50m,
                 CreatedAt = DateTimeOffset.UtcNow

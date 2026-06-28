@@ -61,7 +61,7 @@ public class MappingProfile : Profile
         CreateMap<Domain.Entities.Route, RouteDto>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.CommunityId, opt => opt.MapFrom(src => src.CommunityId))
-            .ForMember(dest => dest.CommunityName, opt => opt.MapFrom(_ => ""))
+            .ForMember(dest => dest.CommunityName, opt => opt.MapFrom(src => src.Community != null ? src.Community.Name : ""))
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.StartPoint, opt => opt.MapFrom(src => src.StartPoint))
             .ForMember(dest => dest.EndPoint, opt => opt.MapFrom(src => src.EndPoint))
@@ -71,7 +71,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.EndLongitude, opt => opt.MapFrom(src => src.EndLongitude))
             .ForMember(dest => dest.DistanceKm, opt => opt.MapFrom(src => src.DistanceKm))
             .ForMember(dest => dest.EstimatedTimeMinutes, opt => opt.MapFrom(src => src.EstimatedTimeMinutes))
-            .ForMember(dest => dest.Stops, opt => opt.Ignore())
+            .ForMember(dest => dest.Stops, opt => opt.MapFrom(src => src.Stops))
             .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.IsActive));
     }
 }

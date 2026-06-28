@@ -14,5 +14,6 @@ public class BookingConfiguration : IEntityTypeConfiguration<Booking>
         builder.HasOne(b => b.Group).WithMany(g => g.Bookings).HasForeignKey(b => b.GroupId).OnDelete(DeleteBehavior.Cascade);
         builder.HasIndex(b => new { b.UserId, b.BookingDate });
         builder.HasIndex(b => new { b.GroupId, b.BookingDate });
+        builder.HasQueryFilter(b => !b.IsDeleted);
     }
 }

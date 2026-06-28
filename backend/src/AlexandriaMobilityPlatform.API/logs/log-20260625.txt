@@ -1,0 +1,70 @@
+2026-06-25 12:46:28.606 +03:00 [WRN] Entity 'Group' has a global query filter defined and is the required end of a relationship with the entity 'Booking'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:46:28.658 +03:00 [WRN] Entity 'Community' has a global query filter defined and is the required end of a relationship with the entity 'CommunityAdmin'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:46:28.659 +03:00 [WRN] Entity 'Community' has a global query filter defined and is the required end of a relationship with the entity 'CommunityMember'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:46:28.659 +03:00 [WRN] Entity 'Group' has a global query filter defined and is the required end of a relationship with the entity 'GroupSubscription'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:46:28.659 +03:00 [WRN] Entity 'Route' has a global query filter defined and is the required end of a relationship with the entity 'Stop'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:46:28.659 +03:00 [WRN] Entity 'Group' has a global query filter defined and is the required end of a relationship with the entity 'Trip'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:46:35.704 +03:00 [ERR] Error connecting to Redis.
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter writer, Nullable`1 serverType) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 620
+   at Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisOptions.ConnectAsync(TextWriter log)
+   at Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1.EnsureRedisServerConnection()
+2026-06-25 12:46:39.892 +03:00 [ERR] Error connecting to Redis.
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter writer, Nullable`1 serverType) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 620
+   at Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisOptions.ConnectAsync(TextWriter log)
+   at Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1.EnsureRedisServerConnection()
+2026-06-25 12:46:41.254 +03:00 [WRN] Entity 'Group' has a global query filter defined and is the required end of a relationship with the entity 'Booking'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:46:41.254 +03:00 [WRN] Entity 'Community' has a global query filter defined and is the required end of a relationship with the entity 'CommunityAdmin'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:46:41.255 +03:00 [WRN] Entity 'Community' has a global query filter defined and is the required end of a relationship with the entity 'CommunityMember'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:46:41.255 +03:00 [WRN] Entity 'Group' has a global query filter defined and is the required end of a relationship with the entity 'GroupSubscription'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:46:41.255 +03:00 [WRN] Entity 'Route' has a global query filter defined and is the required end of a relationship with the entity 'Stop'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:46:41.255 +03:00 [WRN] Entity 'Group' has a global query filter defined and is the required end of a relationship with the entity 'Trip'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:46:42.269 +03:00 [INF] Start installing Hangfire SQL objects...
+2026-06-25 12:46:42.780 +03:00 [INF] Hangfire SQL objects installed.
+2026-06-25 12:46:44.819 +03:00 [INF] Starting Hangfire Server using job storage: 'SQL Server: (localdb)\mssqllocaldb@AlexandriaMobility_Dev'
+2026-06-25 12:46:44.820 +03:00 [INF] Using the following options for SQL Server job storage: Queue poll interval: 00:00:15.
+2026-06-25 12:46:44.820 +03:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-06-25 12:46:44.960 +03:00 [INF] Server desktop-v2lt7nq:52800:ff364e83 successfully announced in 124.5454 ms
+2026-06-25 12:46:44.963 +03:00 [INF] Server desktop-v2lt7nq:52800:ff364e83 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, SqlServerHeartbeatProcess, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-06-25 12:46:44.974 +03:00 [INF] Server desktop-v2lt7nq:52800:ff364e83 all the dispatchers started
+2026-06-25 12:48:31.140 +03:00 [WRN] Entity 'Group' has a global query filter defined and is the required end of a relationship with the entity 'Booking'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:48:31.189 +03:00 [WRN] Entity 'Community' has a global query filter defined and is the required end of a relationship with the entity 'CommunityAdmin'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:48:31.191 +03:00 [WRN] Entity 'Community' has a global query filter defined and is the required end of a relationship with the entity 'CommunityMember'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:48:31.193 +03:00 [WRN] Entity 'Group' has a global query filter defined and is the required end of a relationship with the entity 'GroupSubscription'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:48:31.195 +03:00 [WRN] Entity 'Route' has a global query filter defined and is the required end of a relationship with the entity 'Stop'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:48:31.197 +03:00 [WRN] Entity 'Group' has a global query filter defined and is the required end of a relationship with the entity 'Trip'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-06-25 12:48:33.169 +03:00 [INF] Start installing Hangfire SQL objects...
+2026-06-25 12:48:33.436 +03:00 [INF] Hangfire SQL objects installed.
+2026-06-25 12:48:34.183 +03:00 [INF] Starting Hangfire Server using job storage: 'SQL Server: (localdb)\mssqllocaldb@AlexandriaMobility_Dev'
+2026-06-25 12:48:34.186 +03:00 [INF] Using the following options for SQL Server job storage: Queue poll interval: 00:00:15.
+2026-06-25 12:48:34.188 +03:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-06-25 12:48:34.313 +03:00 [INF] Server desktop-v2lt7nq:44088:9da2e50a successfully announced in 105.758 ms
+2026-06-25 12:48:34.317 +03:00 [INF] Server desktop-v2lt7nq:44088:9da2e50a is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, SqlServerHeartbeatProcess, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-06-25 12:48:34.329 +03:00 [INF] Server desktop-v2lt7nq:44088:9da2e50a all the dispatchers started
+2026-06-25 12:49:02.994 +03:00 [INF] [e233ff21-37c6-44e3-b300-f8be82f71f67] POST /api/auth/login
+2026-06-25 12:49:03.610 +03:00 [INF] [e233ff21-37c6-44e3-b300-f8be82f71f67] 200 completed in 617ms
+2026-06-25 12:49:12.790 +03:00 [INF] [d78e4a5d-a970-4be4-abc2-7f2548b53cd2] POST /api/auth/login
+2026-06-25 12:49:12.917 +03:00 [INF] [d78e4a5d-a970-4be4-abc2-7f2548b53cd2] 200 completed in 126ms
+2026-06-25 12:49:25.809 +03:00 [INF] [3f164a94-b7f0-4f00-98b0-14843d62b287] POST /api/auth/login
+2026-06-25 12:49:25.949 +03:00 [INF] [3f164a94-b7f0-4f00-98b0-14843d62b287] 200 completed in 140ms
+2026-06-25 12:49:26.074 +03:00 [INF] [b1d24eb0-1bfa-422e-bd0d-3f6b14fb93f0] GET /api/communities
+2026-06-25 12:49:26.256 +03:00 [INF] [b1d24eb0-1bfa-422e-bd0d-3f6b14fb93f0] 200 completed in 181ms
+2026-06-25 12:53:39.409 +03:00 [INF] 1 servers were removed due to timeout
+2026-06-25 12:56:12.762 +03:00 [INF] [88fa231b-f0d4-4747-85e6-c8d1e8e58600] POST /api/auth/login
+2026-06-25 12:56:12.945 +03:00 [INF] [88fa231b-f0d4-4747-85e6-c8d1e8e58600] 200 completed in 183ms
+2026-06-25 12:58:48.132 +03:00 [WRN] Stopping the server due to DomainUnload or ProcessExit event...
+2026-06-25 12:58:48.134 +03:00 [INF] Server desktop-v2lt7nq:44088:9da2e50a caught stopping signal...
+2026-06-25 12:58:48.140 +03:00 [INF] Server desktop-v2lt7nq:44088:9da2e50a caught stopped signal...
+2026-06-25 12:58:48.143 +03:00 [WRN] Server desktop-v2lt7nq:44088:9da2e50a caught shutdown signal...
+2026-06-25 12:58:48.144 +03:00 [INF] Server desktop-v2lt7nq:44088:9da2e50a All dispatchers stopped
+2026-06-25 12:58:48.167 +03:00 [INF] Server desktop-v2lt7nq:44088:9da2e50a successfully reported itself as stopped in 14.4483 ms
+2026-06-25 12:58:48.168 +03:00 [INF] Server desktop-v2lt7nq:44088:9da2e50a has been stopped in total 28.0279 ms

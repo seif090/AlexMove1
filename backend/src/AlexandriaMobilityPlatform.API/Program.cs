@@ -63,22 +63,7 @@ builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 
-var redisConnection = builder.Configuration.GetConnectionString("Redis");
-if (!string.IsNullOrEmpty(redisConnection))
-{
-    try
-    {
-        builder.Services.AddSignalR().AddStackExchangeRedis(redisConnection, options => options.Configuration.ChannelPrefix = "AlexMobility");
-    }
-    catch
-    {
-        builder.Services.AddSignalR();
-    }
-}
-else
-{
-    builder.Services.AddSignalR();
-}
+builder.Services.AddSignalR();
 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var secretKey = jwtSettings["SecretKey"] ?? throw new InvalidOperationException("JWT SecretKey not configured");

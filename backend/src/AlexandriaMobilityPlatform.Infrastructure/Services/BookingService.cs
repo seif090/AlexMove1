@@ -110,11 +110,12 @@ public class BookingService : IBookingService
         var today = DateTime.Today;
         var weekStart = today.AddDays(-(int)today.DayOfWeek);
 
-        var summary = new BookingSummaryDto(
-            await _context.Bookings.CountAsync(b => b.UserId == userId, cancellationToken),
-            await _context.Bookings.CountAsync(b => b.UserId == userId && b.BookingDate == today, cancellationToken),
-            await _context.Bookings.CountAsync(b => b.UserId == userId && b.BookingDate >= weekStart, cancellationToken),
-            await _context.Bookings.CountAsync(b => b.UserId == userId && b.Status == BookingStatusEnum.Confirmed, cancellationToken));
+        var totalBookings = await _context.Bookings.CountAsync(b => b.UserId == userId, cancellationToken);
+        var todayBookings = await _context.Bookings.CountAsync(b => b.UserId == userId && b.BookingDate == today, cancellationToken);
+        var weekBookings = await _context.Bookings.CountAsync(b => b.UserId == userId && b.BookingDate >= weekStart, cancellationToken);
+        var activeBookings = await _context.Bookings.CountAsync(b => b.UserId == userId && b.Status == BookingStatusEnum.Confirmed, cancellationToken);
+
+        var summary = new BookingSummaryDto(totalBookings, todayBookings, weekBookings, activeBookings);
 
         return Result<BookingSummaryDto>.Success(summary);
     }
